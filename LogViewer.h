@@ -10,6 +10,10 @@ class LogViewer : public QMainWindow
 public:
 	LogViewer(QWidget *parent = Q_NULLPTR);
 
+public slots:
+	void fileOpenClick();
+
 private:
 	Ui::LogViewerClass ui;
+
 };

@@ -6,9 +6,10 @@ LogViewer::LogViewer(QWidget *parent)
 {
 	ui.setupUi(this);
 
-	// Connect MainWindow SIGNALs to SLOTs
+	// Connect MainMenu SIGNALs to SLOTs
 	connect(ui.actionQuit, SIGNAL(triggered()), this, SLOT(close()));
 	connect(ui.actionOpen, SIGNAL(triggered()), this, SLOT(fileOpenClick()));
+
 }
 
 void LogViewer::fileOpenClick()
@@ -22,6 +23,14 @@ void LogViewer::fileOpenClick()
 	{
 		// Set the MainWindow title with the name of the file, using the plataform native path separator
 		QString fname = OpenDialog.selectedFiles().first();
-		this->setWindowTitle(QDir::toNativeSeparators(fname));
+		this->setWindowTitle("LogViewer - " + QDir::toNativeSeparators(fname));
+
+		// Open the file and add it's contents to the textEdit
+		QFile file;
+		file.setFileName(fname);
+		file.open(QIODevice::OpenModeFlag::ReadOnly);
+		QByteArray fdata = file.readAll();
+		file.close();
+		ui.textEdit->setText(QString(fdata));
 	}
 }

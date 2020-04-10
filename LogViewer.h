@@ -1,6 +1,7 @@
 #pragma once
 
 #include <QtWidgets/QMainWindow>
+#include <QtWidgets/QTextEdit>
 #include "ui_LogViewer.h"
 
 class LogViewer : public QMainWindow
